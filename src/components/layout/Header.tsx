@@ -1,6 +1,7 @@
 "use client";
 
 import Link from "next/link";
+import Image from "next/image";
 import { useState } from "react";
 
 const navLinks = [
@@ -28,11 +29,18 @@ export default function Header() {
           {/* Logo */}
           <Link
             href="/"
-            className="flex items-center gap-2 text-xl font-bold tracking-tight"
-            aria-label="COYOTE - Go to homepage"
+            className="flex items-center gap-2"
+            aria-label="COYOTE Group - Go to homepage"
           >
-            <span className="text-[var(--color-accent)] text-2xl">&#9670;</span>
-            COYOTE
+            <Image
+              src="/logo.jpeg"
+              alt="COYOTE Group"
+              width={48}
+              height={48}
+              className="rounded-full object-cover"
+              priority
+            />
+            <span className="text-xl font-bold tracking-tight hidden sm:inline">COYOTE Group</span>
           </Link>
 
           {/* Desktop Navigation */}

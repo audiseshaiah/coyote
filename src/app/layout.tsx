@@ -7,12 +7,21 @@ import VoiceAssistant from "@/components/accessibility/VoiceAssistant";
 
 export const metadata: Metadata = {
   title: {
-    default: "COYOTE | Interactive Campus Platform",
-    template: "%s | COYOTE",
+    default: "COYOTE Group | Infrastructure & Workforce Development",
+    template: "%s | COYOTE Group",
   },
   description:
-    "A modern, accessible, and interactive campus web platform. Explore buildings, parking areas, and road networks through an engaging interface.",
-  keywords: ["campus", "interactive map", "accessibility", "COYOTE"],
+    "COYOTE Group is a multi-sector infrastructure and workforce development organization combining cold storage, workforce housing, agriculture, daycare, food services, and emergency preparedness.",
+  keywords: ["COYOTE Group", "cold storage", "workforce housing", "agriculture", "daycare", "FEMA", "infrastructure"],
+  icons: {
+    icon: "/favicon.ico",
+    apple: "/icon-192.png",
+  },
+  openGraph: {
+    title: "COYOTE Group | Infrastructure & Workforce Development",
+    description: "Building a self-sustaining infrastructure ecosystem for workforce, FEMA readiness, and smart development.",
+    images: [{ url: "/icon-512.png", width: 512, height: 512 }],
+  },
 };
 
 export default function RootLayout({

@@ -52,7 +52,7 @@ echo "📦 Staging all files..."
 git add .
 
 echo "💾 Committing..."
-git commit -m "COYOTE campus website - full content update with pricing tables" 2>/dev/null || echo "(nothing new to commit)"
+git commit -m "Add COYOTE Group logo as favicon and header icon" 2>/dev/null || echo "(nothing new to commit)"
 
 # --- Step 5: Push ---
 echo ""
