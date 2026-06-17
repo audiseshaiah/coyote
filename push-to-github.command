@@ -1,46 +1,64 @@
 #!/bin/bash
-# COYOTE Campus — Push to GitHub
+# COYOTE Campus — Login to GitHub + Push
 cd "$(dirname "$0")"
 
 echo ""
 echo "================================================"
-echo "  COYOTE Campus — Pushing to GitHub..."
+echo "  COYOTE Campus — GitHub Login & Push"
 echo "================================================"
 echo ""
 
 REMOTE_URL="https://github.com/audiseshaiah/coyote.git"
 
-# Initialize git if not already a repo
+# --- Step 1: GitHub Login ---
+if command -v gh &> /dev/null; then
+  echo "🔐 Logging in to GitHub via browser..."
+  gh auth login --web --git-protocol https
+else
+  echo "⚠️  GitHub CLI (gh) not found. Trying Homebrew install..."
+  if command -v brew &> /dev/null; then
+    brew install gh
+    echo "🔐 Logging in to GitHub via browser..."
+    gh auth login --web --git-protocol https
+  else
+    echo ""
+    echo "ℹ️  No GitHub CLI available."
+    echo "    When prompted during push, enter:"
+    echo "    Username: audiseshaiah"
+    echo "    Password: your GitHub Personal Access Token"
+    echo "    (Generate at: https://github.com/settings/tokens)"
+    echo ""
+  fi
+fi
+
+# --- Step 2: Initialize git if needed ---
 if [ ! -d ".git" ]; then
+  echo ""
   echo "📁 Initializing git repository..."
   git init
   git branch -M main
 fi
 
-# Set remote (add or update)
+# --- Step 3: Set remote ---
 if git remote | grep -q "^origin$"; then
-  echo "🔗 Updating remote origin..."
   git remote set-url origin "$REMOTE_URL"
 else
-  echo "🔗 Adding remote origin..."
   git remote add origin "$REMOTE_URL"
 fi
 
-# Stage all files
+# --- Step 4: Stage + Commit ---
 echo ""
-echo "📦 Staging files..."
+echo "📦 Staging all files..."
 git add .
 
-# Commit
-echo ""
 echo "💾 Committing..."
-git commit -m "COYOTE campus website - full content update with pricing tables"
+git commit -m "COYOTE campus website - full content update with pricing tables" 2>/dev/null || echo "(nothing new to commit)"
 
-# Push
+# --- Step 5: Push ---
 echo ""
-echo "🚀 Pushing to GitHub (main)..."
+echo "🚀 Pushing to GitHub..."
 git push -u origin main
 
 echo ""
-echo "✅ Done! Code pushed to https://github.com/audiseshaiah/coyote"
+echo "✅ Done! https://github.com/audiseshaiah/coyote"
 echo ""
